@@ -14,6 +14,10 @@
 		287C59AB1AC5CF820066AE1D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 287C59AA1AC5CF820066AE1D /* Images.xcassets */; };
 		287C59AE1AC5CF820066AE1D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 287C59AC1AC5CF820066AE1D /* LaunchScreen.xib */; };
 		287C59BA1AC5CF820066AE1D /* SpaceCrashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287C59B91AC5CF820066AE1D /* SpaceCrashTests.swift */; };
+		287C59C61AC5DB870066AE1D /* Resizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287C59C51AC5DB870066AE1D /* Resizable.swift */; };
+		287C59C91AC5DC570066AE1D /* SpaceShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287C59C81AC5DC570066AE1D /* SpaceShip.swift */; };
+		28BFDE351AC5E21B00A327F3 /* SpaceShip.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 28BFDE341AC5E21B00A327F3 /* SpaceShip.atlas */; };
+		28BFDE371AC5E29700A327F3 /* SpaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BFDE361AC5E29700A327F3 /* SpaceScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,10 @@
 		287C59B31AC5CF820066AE1D /* SpaceCrashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCrashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		287C59B81AC5CF820066AE1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		287C59B91AC5CF820066AE1D /* SpaceCrashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCrashTests.swift; sourceTree = "<group>"; };
+		287C59C51AC5DB870066AE1D /* Resizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resizable.swift; sourceTree = "<group>"; };
+		287C59C81AC5DC570066AE1D /* SpaceShip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceShip.swift; sourceTree = "<group>"; };
+		28BFDE341AC5E21B00A327F3 /* SpaceShip.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SpaceShip.atlas; sourceTree = "<group>"; };
+		28BFDE361AC5E29700A327F3 /* SpaceScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +87,12 @@
 		287C599D1AC5CF820066AE1D /* SpaceCrash */ = {
 			isa = PBXGroup;
 			children = (
-				287C59A01AC5CF820066AE1D /* AppDelegate.swift */,
+				287C599E1AC5CF820066AE1D /* Supporting Files */,
+				287C59C31AC5D08F0066AE1D /* Images */,
+				287C59C71AC5DC1D0066AE1D /* Nodes */,
+				287C59C41AC5DB7D0066AE1D /* Scenes */,
 				287C59A51AC5CF820066AE1D /* ViewController.swift */,
 				287C59A71AC5CF820066AE1D /* Main.storyboard */,
-				287C59AA1AC5CF820066AE1D /* Images.xcassets */,
-				287C59AC1AC5CF820066AE1D /* LaunchScreen.xib */,
-				287C59A21AC5CF820066AE1D /* SpaceCrash.xcdatamodeld */,
-				287C599E1AC5CF820066AE1D /* Supporting Files */,
 			);
 			path = SpaceCrash;
 			sourceTree = "<group>";
@@ -93,6 +100,9 @@
 		287C599E1AC5CF820066AE1D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				287C59A01AC5CF820066AE1D /* AppDelegate.swift */,
+				287C59AC1AC5CF820066AE1D /* LaunchScreen.xib */,
+				287C59A21AC5CF820066AE1D /* SpaceCrash.xcdatamodeld */,
 				287C599F1AC5CF820066AE1D /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -113,6 +123,32 @@
 				287C59B81AC5CF820066AE1D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		287C59C31AC5D08F0066AE1D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				28BFDE341AC5E21B00A327F3 /* SpaceShip.atlas */,
+				287C59AA1AC5CF820066AE1D /* Images.xcassets */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		287C59C41AC5DB7D0066AE1D /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				287C59C51AC5DB870066AE1D /* Resizable.swift */,
+				28BFDE361AC5E29700A327F3 /* SpaceScene.swift */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		287C59C71AC5DC1D0066AE1D /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				287C59C81AC5DC570066AE1D /* SpaceShip.swift */,
+			);
+			name = Nodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +233,7 @@
 			files = (
 				287C59A91AC5CF820066AE1D /* Main.storyboard in Resources */,
 				287C59AE1AC5CF820066AE1D /* LaunchScreen.xib in Resources */,
+				28BFDE351AC5E21B00A327F3 /* SpaceShip.atlas in Resources */,
 				287C59AB1AC5CF820066AE1D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,7 +254,10 @@
 			files = (
 				287C59A61AC5CF820066AE1D /* ViewController.swift in Sources */,
 				287C59A41AC5CF820066AE1D /* SpaceCrash.xcdatamodeld in Sources */,
+				287C59C91AC5DC570066AE1D /* SpaceShip.swift in Sources */,
 				287C59A11AC5CF820066AE1D /* AppDelegate.swift in Sources */,
+				287C59C61AC5DB870066AE1D /* Resizable.swift in Sources */,
+				28BFDE371AC5E29700A327F3 /* SpaceScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +451,7 @@
 				287C59BF1AC5CF820066AE1D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		287C59C01AC5CF820066AE1D /* Build configuration list for PBXNativeTarget "SpaceCrashTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +460,7 @@
 				287C59C21AC5CF820066AE1D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
