@@ -10,19 +10,20 @@ import SpriteKit
 
 class SpaceShip : SKSpriteNode {
     
-    let ATLAS_NAME = "SpaceShip"
-    let TEXTURE_NAME_FORMAT = "SpaceShip%d"
-    let ACTION_MOVEMENT_LEFT    = "movement_left_action"
-    let ACTION_MOVEMENT_RIGHT   = "movement_right_action"
+    let ATLAS_NAME              = "SpaceShip"
+    let TEXTURE_NAME_FORMAT     = "SpaceShip%d"
+    let ACTION_MOVEMENT         = "movement_action"
     let ACTION_ANIMATE          = "animate_action"
     let ACTION_ANIMATE_RESTORE  = "animate_restore_action"
-    let atlas: SKTextureAtlas
     
+    let atlas: SKTextureAtlas
+    let textureCountPerSide: Int
     let defaultTexture : SKTexture
     let leftTextures = [SKTexture]()
     let rightTextures = [SKTexture]()
     
     var queuedMovement : Direction?
+    var movementDelay = NSTimeInterval(0)
     var restoring = false
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,18 +36,23 @@ class SpaceShip : SKSpriteNode {
         
         // Default texture
         defaultTexture = atlas.textureNamed(String(format: TEXTURE_NAME_FORMAT, arguments: [0]))
-        
+
         // Left and right textures
-        let textureCount = (atlas.textureNames.count - 1) / 2;
-        for i in reverse(-textureCount..<0) {
+        textureCountPerSide = (atlas.textureNames.count - 1) / 2;
+        for i in reverse(-textureCountPerSide..<0) {
             leftTextures += [atlas.textureNamed(String(format: TEXTURE_NAME_FORMAT, arguments: [i]))]
         }
-        for i in 1...textureCount {
+        for i in 1...textureCountPerSide {
             rightTextures += [atlas.textureNamed(String(format: TEXTURE_NAME_FORMAT, arguments: [i]))]
         }
-        
-        println("\(leftTextures.count) vs \(rightTextures.count)")
-        super.init(texture: defaultTexture, color: nil, size: CGSize(width: 102.4, height: 72.4))
+        super.init(texture: defaultTexture, color: nil, size: CGSizeMake(102.4, 72.4))
+
+        // Physics
+        physicsBody = SKPhysicsBody(texture: texture, size: size)
+        physicsBody!.dynamic = false
+        physicsBody!.categoryBitMask = SpaceScene.Mask.SPACE_SHIP
+        physicsBody!.contactTestBitMask = SpaceScene.Mask.SPACE_SHIP | SpaceScene.Mask.ASTEROID | SpaceScene.Mask.SCENE
+        physicsBody!.collisionBitMask = SpaceScene.Mask.SPACE_SHIP | SpaceScene.Mask.ASTEROID | SpaceScene.Mask.SCENE
     }
     
     
@@ -62,20 +68,35 @@ class SpaceShip : SKSpriteNode {
         
         // ToDo queue animate after restoration
             // However movement will have to be executed
+        
+        
+        // ToDo make a movement action that increases its speed gradually based on current texture index
+        
         switch (direction) {
         case .Left:
-            runAction(SKAction.repeatActionForever(SKAction.moveBy(CGVector(dx: -5, dy: 0), duration: 0.03)), withKey: ACTION_MOVEMENT_LEFT)
-            runAction(SKAction
-                .animateWithTextures(leftTextures, timePerFrame: 0.1, resize: false, restore: false), withKey: ACTION_ANIMATE)
-            return
+            runAction(SKAction.animateWithTextures(leftTextures, timePerFrame: 0.1, resize: false, restore: false), withKey: ACTION_ANIMATE)
         case .Right:
-            runAction(SKAction.repeatActionForever(SKAction.moveBy(CGVector(dx: 5, dy: 0), duration: 0.03)), withKey: ACTION_MOVEMENT_RIGHT)
-            runAction(SKAction
-                .animateWithTextures(rightTextures, timePerFrame: 0.1, resize: false, restore: false), withKey: ACTION_ANIMATE)
-            return
+            runAction(SKAction.animateWithTextures(rightTextures, timePerFrame: 0.1, resize: false, restore: false), withKey: ACTION_ANIMATE)
         default:
             return
         }
+        movementBasedOnCurrentTexture()
+    }
+    
+    func movementBasedOnCurrentTexture() {
+        runAction(SKAction.repeatActionForever(SKAction.sequence([
+            SKAction.runBlock({
+                // Calc movement speed and duration based on current texture
+                if let index = self.getCurrentTextureIndex() {
+                    let index = CGFloat(index)
+                    let by = CGVectorMake(1 * index, 0)
+                    let duration = NSTimeInterval(abs(0.1 * index))
+                    self.runAction(SKAction.moveBy(by, duration: duration))
+                    self.movementDelay = duration
+                }
+            }),
+            SKAction.waitForDuration(movementDelay)
+        ])), withKey: self.ACTION_MOVEMENT)
     }
     
     func stopMovement() {
@@ -85,15 +106,12 @@ class SpaceShip : SKSpriteNode {
         returnToDefault()
         
         // Remove movement and animation actions
-        removeActionForKey(ACTION_MOVEMENT_LEFT)
-        removeActionForKey(ACTION_MOVEMENT_RIGHT)
         removeActionForKey(ACTION_ANIMATE)
     }
     
     func returnToDefault() {
         if let curTextureInfo = getCurrentTextureInfo() {
             var textures : [SKTexture]
-            
             switch (curTextureInfo.1) {
             case .Left:
                 // From left to default
@@ -114,7 +132,10 @@ class SpaceShip : SKSpriteNode {
                 SKAction.animateWithTextures(textures, timePerFrame: 0.1, resize: false, restore: false),
                 SKAction.runBlock({
                     self.restoring = false
-                    // Restoration done, can run queued movement now
+                    // Restoration done
+                    // Remove ongoing movements
+                    self.removeActionForKey(self.ACTION_MOVEMENT)
+                    // Run queued movement (if any)
                     if let queuedMovement = self.queuedMovement {
                         self.move(queuedMovement)
                     }
@@ -128,7 +149,7 @@ class SpaceShip : SKSpriteNode {
     func getCurrentTextureInfo() -> (Int, Direction)? {
         if let texture = texture {
             if texture == defaultTexture {
-                return nil
+                return (0, .None)
             } else if let index = find(leftTextures, texture) {
                 return (index, .Left)
             } else if let index = find(rightTextures, texture) {
@@ -137,6 +158,44 @@ class SpaceShip : SKSpriteNode {
         }
         
         return nil
+    }
+    
+    func getCurrentTextureIndex() -> Int? {
+        if let info = getCurrentTextureInfo() {
+            switch (info.1) {
+            case .Left:
+                return -info.0
+            case .Right:
+                return info.0
+            case .None:
+                return 0
+            default:
+                return nil
+            }
+        }
+        return nil
+    }
+    
+    func shoot() {
+        // ToDo delay between shots
+        
+        // ToDo based where the guns are, based on cur texture
+//        getCurrentTextureIndex()
+        
+        let leftLaser = Laser()
+        let rightLaser = Laser()
+        
+        // Position lasers (depends on the ship position and texture)
+        leftLaser.position = scene!.convertPoint(CGPointMake(43, 50), fromNode: self)
+        rightLaser.position = scene!.convertPoint(CGPointMake(-43, 50), fromNode: self)
+        
+        // Add the laser to scene
+        scene?.addChild(leftLaser)
+        scene?.addChild(rightLaser)
+
+        // ToDo group movement?
+        leftLaser.startMovement()
+        rightLaser.startMovement()
     }
     
 }

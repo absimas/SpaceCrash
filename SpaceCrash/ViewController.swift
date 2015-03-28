@@ -8,12 +8,26 @@
 
 import SpriteKit
 
+func randInRange(lower: Int , upper: Int) -> CGFloat {
+    return CGFloat(lower + Int(arc4random_uniform(UInt32(upper - lower + 1))))
+}
+
+let TRANSITION_DURATION = 0.3
+
 class ViewController: UIViewController {
     
     var skView: SKView { return self.view as SKView }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Debug
+        skView.showsPhysics = true
+        skView.showsFPS = true
+        skView.showsDrawCount = true
+        skView.showsNodeCount = true
+        skView.showsQuadCount = true
+        
         skView.presentScene(SpaceScene(size: skView.frame.size))
     }
     

@@ -18,6 +18,14 @@
 		287C59C91AC5DC570066AE1D /* SpaceShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287C59C81AC5DC570066AE1D /* SpaceShip.swift */; };
 		28BFDE351AC5E21B00A327F3 /* SpaceShip.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 28BFDE341AC5E21B00A327F3 /* SpaceShip.atlas */; };
 		28BFDE371AC5E29700A327F3 /* SpaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BFDE361AC5E29700A327F3 /* SpaceScene.swift */; };
+		40B641C91AC6E818006722BF /* HealthIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B641C81AC6E818006722BF /* HealthIndicator.swift */; };
+		40B641CB1AC6F662006722BF /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B641CA1AC6F662006722BF /* GameOverScene.swift */; };
+		40B641CD1AC6F726006722BF /* ClickableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B641CC1AC6F726006722BF /* ClickableLabel.swift */; };
+		40B641D61AC6FB3F006722BF /* LaserSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40B641D51AC6FB3F006722BF /* LaserSound.mp3 */; };
+		40E575771AC6B79A00DFD93C /* Asteroid.png in Resources */ = {isa = PBXBuildFile; fileRef = 40E575761AC6B79A00DFD93C /* Asteroid.png */; };
+		40E575791AC6D06700DFD93C /* Laser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E575781AC6D06700DFD93C /* Laser.swift */; };
+		40FE97EF1AC6A9C4007CAA34 /* Asteroid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE97EE1AC6A9C4007CAA34 /* Asteroid.swift */; };
+		40FE97F11AC6AA2F007CAA34 /* Space.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE97F01AC6AA2F007CAA34 /* Space.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +54,14 @@
 		287C59C81AC5DC570066AE1D /* SpaceShip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceShip.swift; sourceTree = "<group>"; };
 		28BFDE341AC5E21B00A327F3 /* SpaceShip.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SpaceShip.atlas; sourceTree = "<group>"; };
 		28BFDE361AC5E29700A327F3 /* SpaceScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceScene.swift; sourceTree = "<group>"; };
+		40B641C81AC6E818006722BF /* HealthIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthIndicator.swift; sourceTree = "<group>"; };
+		40B641CA1AC6F662006722BF /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		40B641CC1AC6F726006722BF /* ClickableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickableLabel.swift; sourceTree = "<group>"; };
+		40B641D51AC6FB3F006722BF /* LaserSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LaserSound.mp3; sourceTree = "<group>"; };
+		40E575761AC6B79A00DFD93C /* Asteroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Asteroid.png; sourceTree = "<group>"; };
+		40E575781AC6D06700DFD93C /* Laser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Laser.swift; sourceTree = "<group>"; };
+		40FE97EE1AC6A9C4007CAA34 /* Asteroid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asteroid.swift; sourceTree = "<group>"; };
+		40FE97F01AC6AA2F007CAA34 /* Space.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Space.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +103,7 @@
 		287C599D1AC5CF820066AE1D /* SpaceCrash */ = {
 			isa = PBXGroup;
 			children = (
+				40B641CE1AC6F979006722BF /* Sounds */,
 				287C599E1AC5CF820066AE1D /* Supporting Files */,
 				287C59C31AC5D08F0066AE1D /* Images */,
 				287C59C71AC5DC1D0066AE1D /* Nodes */,
@@ -128,6 +145,7 @@
 		287C59C31AC5D08F0066AE1D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				40E575761AC6B79A00DFD93C /* Asteroid.png */,
 				28BFDE341AC5E21B00A327F3 /* SpaceShip.atlas */,
 				287C59AA1AC5CF820066AE1D /* Images.xcassets */,
 			);
@@ -139,6 +157,7 @@
 			children = (
 				287C59C51AC5DB870066AE1D /* Resizable.swift */,
 				28BFDE361AC5E29700A327F3 /* SpaceScene.swift */,
+				40B641CA1AC6F662006722BF /* GameOverScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -147,8 +166,21 @@
 			isa = PBXGroup;
 			children = (
 				287C59C81AC5DC570066AE1D /* SpaceShip.swift */,
+				40FE97EE1AC6A9C4007CAA34 /* Asteroid.swift */,
+				40FE97F01AC6AA2F007CAA34 /* Space.swift */,
+				40E575781AC6D06700DFD93C /* Laser.swift */,
+				40B641C81AC6E818006722BF /* HealthIndicator.swift */,
+				40B641CC1AC6F726006722BF /* ClickableLabel.swift */,
 			);
 			name = Nodes;
+			sourceTree = "<group>";
+		};
+		40B641CE1AC6F979006722BF /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				40B641D51AC6FB3F006722BF /* LaserSound.mp3 */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +265,9 @@
 			files = (
 				287C59A91AC5CF820066AE1D /* Main.storyboard in Resources */,
 				287C59AE1AC5CF820066AE1D /* LaunchScreen.xib in Resources */,
+				40B641D61AC6FB3F006722BF /* LaserSound.mp3 in Resources */,
 				28BFDE351AC5E21B00A327F3 /* SpaceShip.atlas in Resources */,
+				40E575771AC6B79A00DFD93C /* Asteroid.png in Resources */,
 				287C59AB1AC5CF820066AE1D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,10 +287,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				287C59A61AC5CF820066AE1D /* ViewController.swift in Sources */,
+				40B641CD1AC6F726006722BF /* ClickableLabel.swift in Sources */,
 				287C59A41AC5CF820066AE1D /* SpaceCrash.xcdatamodeld in Sources */,
+				40B641CB1AC6F662006722BF /* GameOverScene.swift in Sources */,
+				40FE97F11AC6AA2F007CAA34 /* Space.swift in Sources */,
 				287C59C91AC5DC570066AE1D /* SpaceShip.swift in Sources */,
 				287C59A11AC5CF820066AE1D /* AppDelegate.swift in Sources */,
+				40FE97EF1AC6A9C4007CAA34 /* Asteroid.swift in Sources */,
 				287C59C61AC5DB870066AE1D /* Resizable.swift in Sources */,
+				40B641C91AC6E818006722BF /* HealthIndicator.swift in Sources */,
+				40E575791AC6D06700DFD93C /* Laser.swift in Sources */,
 				28BFDE371AC5E29700A327F3 /* SpaceScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
