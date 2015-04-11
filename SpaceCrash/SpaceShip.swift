@@ -19,8 +19,8 @@ class SpaceShip : SKSpriteNode {
     let atlas: SKTextureAtlas
     let textureCountPerSide: Int
     let defaultTexture : SKTexture
-    let leftTextures = [SKTexture]()
-    let rightTextures = [SKTexture]()
+    var leftTextures = [SKTexture]()
+    var rightTextures = [SKTexture]()
     
     var queuedMovement : Direction?
     var movementDelay = NSTimeInterval(0)
@@ -30,7 +30,7 @@ class SpaceShip : SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override init() {
+    init() {
         // Texture atlas
         atlas = SKTextureAtlas(named: ATLAS_NAME)
         

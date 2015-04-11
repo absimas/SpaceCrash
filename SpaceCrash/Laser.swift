@@ -19,7 +19,7 @@ class Laser : SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override init() {
+    init() {
 
         super.init(texture: nil, color: SKColor.redColor(), size: LASER_SIZE)
         

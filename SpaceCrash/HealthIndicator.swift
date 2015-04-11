@@ -27,7 +27,7 @@ class HealthIndicator : SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override init() {
+    init() {
         healthNode = SKSpriteNode(texture: nil, color: SKColor.redColor(), size: Const.HEALTH_SIZE)
         super.init(texture: nil, color: SKColor.blackColor(), size: Const.INDICATOR_SIZE)
 

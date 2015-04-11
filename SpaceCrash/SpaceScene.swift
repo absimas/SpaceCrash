@@ -68,12 +68,12 @@ class SpaceScene : SKScene, Resizable, SKPhysicsContactDelegate {
         space.startAsteroidRain()
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         // ToDo need to implement multiple clicks so can shoot and move at the same time?
-            // Or shooting is a double / 2 finger click
-            // Or shoot only when clicked on a a asteroid node
+        // Or shooting is a double / 2 finger click
+        // Or shoot only when clicked on a a asteroid node
         // Select 1st touch
-        let touch = touches.allObjects[0] as UITouch
+        let touch = touches.first as! UITouch
         
         // Determine East or West
         let direction = findDirection(spaceShip.position, touchPos: touch.locationInNode(self))
@@ -82,7 +82,6 @@ class SpaceScene : SKScene, Resizable, SKPhysicsContactDelegate {
         spaceShip.move(direction)
         spaceShip.shoot()
     }
-    
     
     func findDirection(mainPos: CGPoint, touchPos: CGPoint) -> Direction {
         // East or West
@@ -95,7 +94,7 @@ class SpaceScene : SKScene, Resizable, SKPhysicsContactDelegate {
         }
     }
     
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         spaceShip.stopMovement()
     }
     

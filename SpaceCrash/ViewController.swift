@@ -16,7 +16,7 @@ let TRANSITION_DURATION = 0.3
 
 class ViewController: UIViewController {
     
-    var skView: SKView { return self.view as SKView }
+    var skView: SKView { return self.view as! SKView }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     // Auto layout methods
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         super.willAnimateRotationToInterfaceOrientation(toInterfaceOrientation, duration: duration)
-        updateSceneSize(toInterfaceOrientation)
+        updateSceneSize(UIInterfaceOrientation.Portrait)
     }
     
     func updateSceneSize(toInterfaceOrientation: UIInterfaceOrientation) {
