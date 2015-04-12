@@ -59,10 +59,7 @@ class SpaceScene : SKScene, Resizable, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         // Preload sound
         laserSound = SKAction.playSoundFileNamed("LaserSound.mp3", waitForCompletion: false)
-        
-        // Constrain the position, so it doesn't leave the screen
-        let constraint = SKConstraint.positionX(SKRange(lowerLimit: 0, upperLimit: frame.width))
-        spaceShip.constraints = [constraint]
+//        laserSound = SKAction.runBlock({ () -> Void in })
         
         // Begin the asteroid rain
         space.startAsteroidRain()
@@ -104,6 +101,10 @@ class SpaceScene : SKScene, Resizable, SKPhysicsContactDelegate {
         
         // Re-Position the SpaceShip // ToDo position only once, or position according to previous orientation
         spaceShip.position = CGPointMake(CGRectGetMidX(frame), CGRectGetMidX(frame) / 4)
+        
+        // Constrain the SpaceShip position, so it doesn't leave the screen
+        let constraint = SKConstraint.positionX(SKRange(lowerLimit: spaceShip.frame.width / 2, upperLimit: frame.width - spaceShip.frame.width / 2))
+        spaceShip.constraints = [constraint]
 
         // Resize Asteroids // Resize SpaceShip
         // Or let space resize its nodes
