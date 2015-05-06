@@ -56,7 +56,9 @@ class Laser : SKSpriteNode {
                 }
             }),
         ])))
-        runAction(laserSound!)
+        if let laserSound = laserSound {
+            runAction(laserSound)
+        }
     }
     
     func remove() {

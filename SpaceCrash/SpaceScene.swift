@@ -59,7 +59,6 @@ class SpaceScene : SKScene, Resizable, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         // Preload sound
         laserSound = SKAction.playSoundFileNamed("LaserSound.mp3", waitForCompletion: false)
-//        laserSound = SKAction.runBlock({ () -> Void in })
         
         // Begin the asteroid rain
         space.startAsteroidRain()
